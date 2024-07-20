@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<h1 class="myff text-center" style="font-size: 4rem;">My Trips</h1>
+<div class="container pb-4">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Days</th>
+                <th scope="col">Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ booking.destination.name }}</td>
+                    <td>{{ booking.start_date }}</td>
+                    <td>{{ booking.destination.days }}</td>
+                    <td>${{ booking.destination.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<h3 class="text-center myff pt-3">Thanks for choosing us!</h3>
+{% include 'footer.html' %}
+{% endblock %}

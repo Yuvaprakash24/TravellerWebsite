@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<h2 class="myff text-center">My Profile</h2>
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            {% if profile_picture %}
+                <img src="{{ profile_picture }}" alt="Profile Picture" style="width:250px;height: 250px;border-radius:50%;object-fit: cover;">
+            {% else %}
+                <img src="{% static 'img/testmonial/default.jpg' %}" alt="Default Profile Picture" style="width:250px;height: 250px;border-radius:50%;object-fit: cover;">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p class="mb-3"><strong>Username:</strong> {{ name }}</p>
+            <p class="mb-3"><strong>Email:</strong> {{ email }}</p>
+            <p class="mb-3"><strong>First Name:</strong> {{ fname }}</p>
+            <p class="mb-3"><strong>Last Name:</strong> {{ lname }}</p>
+            <p class="mb-3"><strong>Number of Booked Trips:</strong> {{ count }}</p>
+            <a class="boxed-btn4" href="{% url 'editprofile' %}">Edit Profile</a>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

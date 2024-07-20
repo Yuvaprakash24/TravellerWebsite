@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+{% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" style="max-width: 75%; margin-left:12%;" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+              </button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+              {{ message }}
+        </div>
+{% endfor %}
+<div class="destination_banner_wrap overlay">
+    <div class="destination_text text-center">
+        <h3>{{ destination.name }}</h3>
+        <p>{{ destination.short_desc }}</p>
+    </div>
+</div>
+
+<div class="destination_details_info">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-9">
+                <div class="destination_info">
+                    <h3>Description</h3>
+                    <p>{{ destination.brief_desc }}</p>
+                    {% for day in days %}
+                    <div class="single_destination">
+                        <h4>Day-{{ day.day_number }}</h4>
+                        <p>{{ day.day_info }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="bordered_1px"></div>
+
+                <!-- Book the Trip Button -->
+                <div class="inthebox">
+                    <h3>Interested to book the tickets for trip!</h3>
+                    <div class="book_trip">
+                        {% if user.is_authenticated%}
+                        <button class="boxed-btn4" data-toggle="modal" id="bookTripButton" data-target="#bookTripModal">Book the Trip</button>
+                        {% else %}
+                        <a class="boxed-btn4" href="{% url 'login' %}?next={{ request.path }}">Login to Book</a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Book the Trip Modal -->
+                <div class="modal fade custom_search_pop" id="bookTripModal" tabindex="-1" role="dialog" aria-labelledby="bookTripModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="booking_form">
+                                <form method="post" action="{% url 'bookthetrip' destination.id %}">
+                                    {% csrf_token %}
+                                    <h2 class="mypri text-center">Trip Booking Form</h2>
+                                    <input type="hidden" name="destination" value="{{ destination.id }}">
+                                    <div class="form-group">
+                                        <label for="tourist_name">Name</label>
+                                        <input type="text" class="form-control" id="tourist_name" name="tourist_name" placeholder="Enter your name" required>
+                                        {% for error in form.tourist_name.errors %}
+                                            <p class="text-danger">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tourist_email">Email</label>
+                                        <input type="email" class="form-control" id="tourist_email" name="tourist_email" placeholder="Enter your email" required>
+                                        {% for error in form.tourist_email.errors %}
+                                            <p class="text-danger">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tourist_phone">Phone Number</label>
+                                        <input type="tel" class="form-control" id="tourist_phone" name="tourist_phone" placeholder="Enter your phone number" required>
+                                        {% for error in form.tourist_phone.errors %}
+                                            <p class="text-danger">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start_date">Start Date</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                        {% for error in form.start_date.errors %}
+                                            <p class="text-danger">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="special_requests">Special Requests (If required)</label>
+                                        <textarea class="form-control" id="special_requests" name="special_requests" rows="3" placeholder="Enter requirements info"></textarea>
+                                    </div>
+                                    <h6>If booking is completed successfully you will be redirected to my plans and can see the travel. If not, check out the booking form again.</h6>
+                                    <button type="submit" class="btn bookingbut">Book Now</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bordered_1px"></div>
+                <div class="contact_join">
+                    <h3>Contact for any query regarding the trip</h3>
+                    <form action="{% url 'tripquery' destination.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="single_input">
+                                    <input type="text" name="name" placeholder="Your Name">
+                                    {% for error in form.name.errors %}
+                                        <p class="text-danger">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="single_input">
+                                    <input type="text" name="phno" placeholder="Phone no.">
+                                    {% for error in form.phno.errors %}
+                                        <p class="text-danger">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="single_input">
+                                    <textarea id="" cols="30" rows="10" name="query" placeholder="Message"></textarea>
+                                    {% for error in form.query.errors %}
+                                        <p class="text-danger">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="submit_btn">
+                                    <button class="boxed-btn4" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- newletter_area_start  -->
+    <div class="newletter_area overlay">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="newsletter_text">
+                                <h4>Subscribe Our Newsletter</h4>
+                                <p>Subscribe newsletter to get offers and about new places to discover.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="mail_form">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-9 col-md-8">
+                                        <div class="newsletter_field">
+                                            <input type="email" id="emailInput" placeholder="Your mail">
+                                            <p id="success" class="success text-center">Successfully subscribed to Traveller.</p>
+                                            <p id="warning" class="warning text-center">Please enter the email correctly.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="newsletter_btn">
+                                            <button class="boxed-btn4" type="button" onclick="subscribe()">Subscribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- newletter_area_end  -->
+
+<div class="popular_places_area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section_title text-center mb_70">
+                    <h3>More Places</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for i in dests %}
+            <div class="col-lg-4 col-md-6">
+                <div class="single_place">
+                    <div class="thumb">
+                        <img src="{{i.img.url}}" alt="">
+                        <a href="{% url 'travelplace' i.id %}" class="prise">${{i.price}}</a>
+                        {% if i.flag %}
+                        <i class="so">Special Offer</i>
+                        {% endif %}
+                    </div>
+                    <div class="place_info">
+                        <a href="{% url 'travelplace' i.id %}"><h3>{{i.name}}</h3></a>
+                        <p>{{i.cont}}</p>
+                        <div class="rating_days d-flex justify-content-between">
+                            <span class="d-flex justify-content-center align-items-center">
+                                 <i class="fa fa-star"></i> 
+                                 <i class="fa fa-star"></i> 
+                                 <i class="fa fa-star"></i> 
+                                 <i class="fa fa-star"></i> 
+                                 <i class="fa fa-star"></i>
+                                 <a href="#">({{i.reviews}} Review)</a>
+                            </span>
+                            <div class="days">
+                                <i class="fa fa-clock-o"></i>
+                                <a href="#">{{i.days}} Days</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}
