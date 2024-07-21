@@ -17,7 +17,7 @@
     },
     {
       "src": "/static/(.*)",
-      "dest": "/vercel/path0/staticfiles/$1"
+      "dest": "/staticfiles/$1"
     },
     {
       "src": "/media/(.*)",
