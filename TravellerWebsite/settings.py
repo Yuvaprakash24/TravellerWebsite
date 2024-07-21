@@ -78,11 +78,17 @@ WSGI_APPLICATION = 'TravellerWebsite.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'TravellerWebsite',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'De@dp00l',
+        # 'HOST': 'localhost',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'TravellerWebsite',
-        'USER': 'postgres',
-        'PASSWORD': 'De@dp00l',
-        'HOST': 'localhost',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
