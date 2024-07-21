@@ -1,26 +1,14 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "TravellerWebsite/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb",
-        "includeFiles": [
-          "staticfiles/**",
-          "media/**"
-        ]
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
       "dest": "/static/$1"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "/media/$1"
     },
     {
       "src": "/(.*)",
