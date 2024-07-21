@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'vercel','path0','staticfiles')
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'vercel','path0','staticfiles')
+STATICFILES_DIRS = [BASE_DIR / 'vercel/path0/staticfiles']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL='/media/'
