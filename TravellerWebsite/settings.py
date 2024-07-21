@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'TravellerWebsite.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    # 'default': {
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'TravellerWebsite',
         # 'USER': 'postgres',
@@ -90,11 +90,11 @@ DATABASES = {
         # 'PASSWORD': os.getenv('DB_PASSWORD'),
         # 'HOST': os.getenv('DB_HOST'),
         # 'PORT': os.getenv('DB_PORT', '5432'),
-        'default': dj_database_url.config(
+    # }
+    'default': dj_database_url.config(
         default=os.getenv('DATABASE_URL'),
         conn_max_age=600, 
         ssl_require=True 
-    }
 }
 
 
