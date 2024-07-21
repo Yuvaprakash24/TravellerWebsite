@@ -2,13 +2,9 @@
   "builds": [
     {
       "src": "TravellerWebsite/wsgi.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static",
+      "use": "@vercel/python",
       "config": {
-        "distDir": "TravellerWebsite/staticfiles"
+        "buildCommand": "bash build_files.sh"
       }
     }
   ],
