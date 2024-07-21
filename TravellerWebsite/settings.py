@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import cloudinary_storage
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -120,5 +121,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URLS ='/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':'CL_Name',
+    'API_KEY':'API_Key',
+    'API_SECRET':'API_Security',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_stroage.storage.MediaCloudinaryStorage'
