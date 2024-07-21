@@ -7,8 +7,16 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/staticfiles/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/mediafiles/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "TravellerWebsite/wsgi.py"
     }
-  ]
+  ],
 }
