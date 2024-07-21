@@ -18,5 +18,5 @@
       "src": "/(.*)",
       "dest": "TravellerWebsite/wsgi.py"
     }
-  ],
+  ]
 }
