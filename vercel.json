@@ -1,8 +1,16 @@
 {
   "builds": [
     {
-      "src": "TravellerWebsite/wsgi.py",
+      "src": "manage.py",
       "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "buildCommand": "python manage.py collectstatic --noinput"
+      }
+    },
+    {
+      "src": "TravellerWebsite/wsgi.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -17,16 +25,6 @@
     {
       "src": "/(.*)",
       "dest": "TravellerWebsite/wsgi.py"
-    }
-  ],
-  "builds": [
-    {
-      "src": "manage.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb",
-        "buildCommand": "python manage.py collectstatic --noinput"
-      }
     }
   ]
 }
