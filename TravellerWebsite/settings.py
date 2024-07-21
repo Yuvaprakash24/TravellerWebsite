@@ -124,9 +124,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 # MEDIA_URLS ='/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME':'CL_Name',
-    'API_KEY':'API_Key',
+    'API_KEY':'API_Value',
     'API_SECRET':'API_Security',
 }
 
