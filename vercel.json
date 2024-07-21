@@ -16,7 +16,7 @@
       "dest": "TravellerWebsite/wsgi.py"
     },
     {
-      "src": "/static/(.*)",
+      "src": "/staticfiles/(.*)",
       "dest": "/staticfiles/$1"
     },
     {
