@@ -10,5 +10,13 @@
       "src": "/(.*)",
       "dest": "TravellerWebsite/wsgi.py"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "TravellerWebsite.settings"
+    },
+    "commands": [
+      "python manage.py collectstatic --noinput"
+    ]
+  }
 }
