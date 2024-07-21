@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Traveller',
     'phonenumber_field',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 AUTH_USER_MODEL = 'Traveller.User'
 MIDDLEWARE = [
