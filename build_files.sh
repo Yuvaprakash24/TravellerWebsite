@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "Check check....."
 # Install any dependencies (if necessary)
 pip install -r requirements.txt
 
