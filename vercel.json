@@ -4,7 +4,7 @@
       "src": "TravellerWebsite/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+        "buildCommand": "echo 'Build command executed'"
       }
     }
   ],
