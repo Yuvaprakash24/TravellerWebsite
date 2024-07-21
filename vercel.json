@@ -1,19 +1,13 @@
 {
-  "builds": [
-    {
-      "src": "TravellerWebsite/wsgi.py",
-      "use": "@vercel/python"
-    },
-    {
-        "src": "build_files.sh",
-        "use": "@vercel/static-build",
-        "config": { "distDir": "staticfiles" }
-    }
-  ],
+  "builds": [{
+      "src": "yourproject/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+  }],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "TravellerWebsite/wsgi.py"
-    }
+      {
+          "src": "/(.*)",
+          "dest": "yourproject/wsgi.py"
+      }
   ]
 }
