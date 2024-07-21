@@ -5,13 +5,16 @@
       "use": "@vercel/python"
     },
     {
-        "src": "build_files.sh",
-        "use": "@vercel/static"
+      "src": "build_files.sh",
+      "use": "@vercel/static",
+      "config": {
+        "distDir": "TravellerWebsite/staticfiles"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/staticfiles/(.*)",
+      "src": "/static/(.*)",
       "dest": "/staticfiles/$1"
     },
     {
