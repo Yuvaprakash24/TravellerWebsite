@@ -2,7 +2,7 @@
   "builds": [
     {
       "src": "TravellerWebsite/wsgi.py",
-      "use": "@vercel/python",
+      "use": "@vercel/python"
     },
     {
         "src": "build_files.sh",
